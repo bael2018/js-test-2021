@@ -17,14 +17,6 @@ const api = [
               "id": 3,
               "name": "XIAOMI",
               "slug": "XIAOMI",
-              "categories": [
-                {
-                    "id": 1,
-                    "name": "Pokemon",
-                    "slug": "poke",
-                    "eeCatId": 2,
-                }
-              ],
               "eeCatId": 17,
               "imageUrl": null
             },
@@ -3212,8 +3204,6 @@ const api = [
 ]
 
 const container = document.querySelector('.container')
-
-console.log(api);
 
 const template = api.reduce(( prev, item ) => {
     return prev += cardTemplate(item)
