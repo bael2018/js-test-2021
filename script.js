@@ -17,6 +17,14 @@ const api = [
               "id": 3,
               "name": "XIAOMI",
               "slug": "XIAOMI",
+              "categories": [
+                {
+                    "id": 1,
+                    "name": "Pokemon",
+                    "slug": "poke",
+                    "eeCatId": 2,
+                }
+              ],
               "eeCatId": 17,
               "imageUrl": null
             },
@@ -3205,34 +3213,36 @@ const api = [
 
 const container = document.querySelector('.container')
 
+console.log(api);
+
 const template = api.reduce(( prev, item ) => {
     return prev += cardTemplate(item)
 } , '')
 
 container.innerHTML = template
 
-function cardTemplate({ name , categories }){
-    return `
-        <li>
-            <h3>${name}</h3>
-        </li>
-
-        <ul>
-            ${categories.reduce((prev , { name , categories }) => {
-                return prev += `
+function hasCategory(item){
+    if(item){
+        return item.reduce((prev , { name , categories }) => {
+            return prev += `
+            <ul>
                 <li>
-                    <h4>${name}</h4>
+                    ${name}
                 </li>
+                ${hasCategory(categories)}
+            </ul>
+        `
+        } , '')
+    }else{
+        return ''
+    }
+}
 
-                <ul>
-                    ${categories.reduce((prev , { name }) => {
-                        return prev += `
-                        <li>${name}</li>
-                    `
-                    } , '')}
-                </ul>
-            `
-            } , '')}
+function cardTemplate({ name , categories }){
+    return  `
+        <ul>
+            <li>${name}<li>
+            ${hasCategory(categories)}
         </ul>
     `
 }
