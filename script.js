@@ -3206,7 +3206,6 @@ const api = [
 const container = document.querySelector('.container')
 
 const template = api.reduce(( prev, item ) => {
-    console.log(item);
     return prev += cardTemplate(item)
 } , '')
 
